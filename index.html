@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Smart Summarizer</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+    }
+    textarea {
+      width: 80%;
+      height: 120px;
+      margin: 10px;
+      padding: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    select {
+      padding: 8px;
+    }
+    .output {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 5px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🤖 AI Smart Text Summarizer</h2>
+
+  <textarea id="input" placeholder="Paste your text here..."></textarea><br>
+
+  <label>Select Mode:</label>
+  <select id="mode">
+    <option value="short">Short Summary</option>
+    <option value="detailed">Detailed Summary</option>
+    <option value="points">Bullet Points</option>
+  </select>
+
+  <br><br>
+  <button onclick="summarize()">Summarize</button>
+
+  <div class="output" id="output">Your summary will appear here...</div>
+
+  <script>
+    function summarize() {
+      let text = document.getElementById("input").value;
+      let mode = document.getElementById("mode").value;
+
+      if (!text) {
+        document.getElementById("output").innerText = "Please enter text!";
+        return;
+      }
+
+      let sentences = text.split(".");
+      let result = "";
+
+      if (mode === "short") {
+        result = sentences.slice(0, 2).join(".") + "...";
+      } 
+      else if (mode === "detailed") {
+        result = sentences.slice(0, 4).join(".") + "...";
+      } 
+      else if (mode === "points") {
+        result = sentences.slice(0, 4).map(s => "• " + s.trim()).join("\n");
+      }
+
+      document.getElementById("output").innerText = result;
+    }
+  </script>
+
+</body>
+</html>
